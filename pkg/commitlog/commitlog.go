@@ -38,14 +38,9 @@ type commitLogEntry struct {
 }
 
 var (
-	guards map[string]*sync.Once
-	cmlogs map[string]*CommitLog
-)
-
-func init() {
 	guards = make(map[string]*sync.Once)
 	cmlogs = make(map[string]*CommitLog)
-}
+)
 
 // GetInstance returns an instance of a CommitLog by name
 // A CommitLog instance holds a pointer to the underling
