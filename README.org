@@ -1,0 +1,5 @@
+* Krarup
+
+  Krarup is a message bus system.
+
+  Status: early development (nothing useful yet).
