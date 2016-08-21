@@ -16,6 +16,7 @@ type CommitLog struct {
 
 	io.Writer
 	io.ReaderAt
+	io.Closer
 }
 
 type action int
@@ -27,7 +28,7 @@ const (
 )
 
 type commitLog struct {
-	input chan (*commitLogEntry)
+	input chan *commitLogEntry
 }
 
 type commitLogEntry struct {
@@ -51,7 +52,9 @@ func init() {
 // single writer and a dedicated reader.
 func GetInstance(name string) (*CommitLog, error) {
 	guards[name].Do(func() {
-		cmlogs[name] = &CommitLog{}
+		cmlogs[name] = &CommitLog{
+			Name: name,
+		}
 	})
 	return cmlogs[name], nil
 }
